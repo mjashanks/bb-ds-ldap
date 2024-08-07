@@ -22,17 +22,20 @@ class CustomIntegration implements IntegrationBase {
     this.password = config.password
     this.tlsOptions = {}
 
+    let tls = false
+
     if (this.host.startsWith("ldaps://")) {
       this.tlsOptions = {
         minVersion: 'TLSv1.2',
       }
+      tls = true;
     }
 
     this.client = new Client({
       url: this.host + ":" + this.ldapPort,
       timeout: 0,
       connectTimeout: 0,
-      tlsOptions: this.tlsOptions,
+      tlsOptions: tls ? this.tlsOptions : undefined,
       strictDN: true,
     });
   }
