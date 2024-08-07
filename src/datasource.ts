@@ -44,7 +44,8 @@ class CustomIntegration implements IntegrationBase {
     try {
       let attr = JSON.parse(query.attributes);
       await this.client.bind(this.userDN, this.password);
-      return await this.client.add(query.objectDN, attr);
+      await this.client.add(query.objectDN, attr);
+      return {};
     } catch (err) {
       throw err;
     } finally {
@@ -80,7 +81,8 @@ class CustomIntegration implements IntegrationBase {
         }));
       })
 
-      return await this.client.modify(query.objectDN, attr);
+      await this.client.modify(query.objectDN, attr);
+      return {};
     } catch (err) {
       throw err;
     } finally {
@@ -91,7 +93,8 @@ class CustomIntegration implements IntegrationBase {
   async delete(query: { objDN: string }) {
     try {
       await this.client.bind(this.userDN, this.password);
-      return await this.client.del(query.objDN);
+      await this.client.del(query.objDN);
+      return {}
     } catch (err) {
       throw err;
     } finally {
