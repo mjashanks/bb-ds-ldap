@@ -28,7 +28,7 @@ class CustomIntegration implements IntegrationBase {
       this.tlsOptions = {
         minVersion: 'TLSv1.2',
       }
-      tls = true;
+      tls = true
     }
 
     this.client = new Client({
